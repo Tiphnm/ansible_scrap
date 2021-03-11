@@ -29,6 +29,8 @@
         name: 
           - psycopg2-binary
           - Flask
+          - requests 
+          - beautifulsoup4
 
     - name: Modification mot de passe Postgres
       become: yes
