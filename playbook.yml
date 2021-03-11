@@ -1,0 +1,46 @@
+--- 
+- name: Intro Ansible
+  hosts: scrapvm
+  remote_user: Tiphn
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Installation de git
+      apt: 
+        name: git 
+        update_cache: yes
+
+    - name: installation de postgres
+      apt: 
+        name: postgresql
+        update_cache: yes
+
+    - name: installation de pip
+      apt:
+        name: python-pip
+
+    - name: installation de pip3
+      apt:
+        name: python3-pip
+
+    - name: Installation des packages python
+      pip:
+        name: 
+          - psycopg2-binary
+          - Flask
+
+    - name: Modification mot de passe Postgres
+      become: yes
+      become_method: sudo
+      become_user: postgres
+      postgresql_user: 
+        db: postgres
+        name: postgres
+        password: "123"
+
+    - name: Clone a repo git
+      git:
+        repo: https://github.com/Tiphnm/ansible_scrap.git
+        dest: /home/Tiphn/scrap 
+... 
